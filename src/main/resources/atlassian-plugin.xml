@@ -9,10 +9,10 @@
     <param name="plugin-icon">images/pluginIcon.png</param>
     <param name="plugin-logo">images/pluginLogo.png</param>
   </plugin-info>
-  
+
   <!-- add our i18n resource -->
   <resource type="i18n" name="i18n" location="datauserselect"/>
-  
+
   <!-- add our web resources -->
   <web-resource key="datauserselect-resources" name="datauserselect Web Resources">
     <context>jira.general</context>
@@ -20,12 +20,13 @@
     <dependency>com.atlassian.auiplugin:jquery-ui-other</dependency>
     <resource type="download" name="datauserselect.css" location="/css/datauserselect.css"/>
     <resource type="download" name="datauserselect.js" location="/js/datauserselect.js"/>
+    <dependency>jira.webresources:autocomplete</dependency>
     <resource type="download" name="images/" location="/images"/>
   </web-resource>
-  
+
   <!-- import from the product container -->
   <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
-  
+
   <customfield-type name="Data User Custom Field" i18n-name-key="data-user-custom-field.name" key="data-user-custom-field" class="com.anthem.juju.DataUserCustomField">
     <description key="data-user-custom-field.description">The Data User Custom Field Plugin</description>
     <resource name="view" type="velocity" location="/templates/customfields/data-user-custom-field/view.vm"/>
@@ -36,5 +37,5 @@
     <description>This servlet responds to the autocomplete widget's AJAX search.</description>
     <url-pattern>/juju/user-search</url-pattern>
   </servlet>
- 
+
 </atlassian-plugin>
