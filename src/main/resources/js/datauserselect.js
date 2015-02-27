@@ -1,9 +1,17 @@
 JIRA.bind(JIRA.Events.NEW_CONTENT_ADDED, function (e, context) {juju_init(context)});
 
+var  data = [
+ 	  		{"label" : "Aragorn", "value" : "mmaheu"},
+ 	  		{"label" : "Arwen" , "value" : "swilson"},
+ 	  		{"label" : "Bilbo Baggins" , "value" : "bperkins"}
+ 	  		];
+
+
 function juju_init(context) {
     AJS.$("#juju-user-search").autocomplete(
-      {
-        source: "http://localhost:2990/jira/plugins/servlet/juju/user-search",
+      {    	 
+    	//source:data,  
+    	source: "http://localhost:2990/jira/plugins/servlet/juju/user-search",
         minLength: 2
         }
     );

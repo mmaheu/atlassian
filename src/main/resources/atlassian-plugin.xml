@@ -17,10 +17,9 @@
   <web-resource key="datauserselect-resources" name="datauserselect Web Resources">
     <context>jira.general</context>
     <dependency>com.atlassian.auiplugin:ajs</dependency>
-    <dependency>com.atlassian.auiplugin:jquery-ui-other</dependency>
+    <dependency>com.atlassian.auiplugin:jquery-ui-other</dependency>    
     <resource type="download" name="datauserselect.css" location="/css/datauserselect.css"/>
-    <resource type="download" name="datauserselect.js" location="/js/datauserselect.js"/>
-    <dependency>jira.webresources:autocomplete</dependency>
+    <resource type="download" name="datauserselect.js" location="/js/datauserselect.js"/>    
     <resource type="download" name="images/" location="/images"/>
   </web-resource>
 
