@@ -8,7 +8,7 @@ var  data = [
 
 
 function juju_init(context) {
-    AJS.$("#juju-user-search").autocomplete(
+    AJS.$("#txtControl").autocomplete(
       {    	 
     	//source:data,  
     	source: "http://localhost:2990/jira/plugins/servlet/juju/user-search",
