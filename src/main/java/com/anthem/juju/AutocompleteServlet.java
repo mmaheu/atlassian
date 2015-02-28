@@ -21,11 +21,12 @@ public class AutocompleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         res.setContentType("application/json; charset=utf-8");
-
+        String search = (String)req.getAttribute("juju-user-search");
+        System.out.println("Search String" + search);
         PrintWriter out = res.getWriter();
         String json = outsideUsers();
-        res.getWriter().write(json);
-        System.out.println("JSON: " + json.toString());
+        out.write(json);
+        System.out.println("JSON: " + json.toString());       
         out.close();
     }
 
@@ -37,7 +38,7 @@ public class AutocompleteServlet extends HttpServlet {
       String results = "";
       String cvsSplitBy = ",";
       String[] users = null;
-      StringBuffer sb = new StringBuffer();
+      StringBuilder sb = new StringBuilder();
       try {
 
         br = new BufferedReader(new FileReader(csvFile));
@@ -46,7 +47,10 @@ public class AutocompleteServlet extends HttpServlet {
 
                 // use comma as separator
           users = line.split(cvsSplitBy);
-          sb.append("{label=\"" + users[0] + "\" , value=\""  + users[1] + "\"},");
+          sb.append("{\"label\":\n");
+          sb.append('"'+ users[0] +'"' + "\n" );
+          sb.append(",\"value\":\n");
+          sb.append('"'+ users[1] +'"' + "},");
         }
 
         results  = sb.toString().substring(0, sb.toString().length()-1) + "]";
