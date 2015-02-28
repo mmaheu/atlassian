@@ -6,8 +6,8 @@
     <artifactId>datauserselect</artifactId>
     <version>1.0-SNAPSHOT</version>
     <organization>
-        <name>Example Company</name>
-        <url>http://www.example.com/</url>
+        <name>Anthem</name>
+        <url>http://www.anthem.com/</url>
     </organization>
     <name>datauserselect</name>
     <description>This is the com.anthem.juju:datauserselect plugin for Atlassian JIRA.</description>
