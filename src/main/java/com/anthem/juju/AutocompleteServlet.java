@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import java.lang.*;
+
 //Added these imports to load the CSV file from JIRA_HOME
 import java.io.File;
 import com.atlassian.jira.component.ComponentAccessor;
@@ -21,9 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-public class AutocompleteServlet extends HttpServlet {
+public class AutoCompleteServlet extends HttpServlet {
 
-    private static final Logger log = LoggerFactory.getLogger(AutocompleteServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(AutoCompleteServlet.class);
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         doGet(req, res);
@@ -35,7 +37,6 @@ public class AutocompleteServlet extends HttpServlet {
        
         String search = req.getParameter("term");        
         System.out.println("Search String" + search);
-        
         PrintWriter out = res.getWriter();
         String json = searchUsers(search);
         out.write(json);
@@ -43,6 +44,11 @@ public class AutocompleteServlet extends HttpServlet {
         out.close();
     }
 
+    /**
+     * Returns a JSON String that is used by the JQuery custom JIRA field
+     * @param searchString
+     * @return results
+     */
     public String searchUsers(String searchString){
 
      // String csvFile = "/Users/mmaheu/Development/users.csv";  ** Show class that we can avoid hardcoding paths
@@ -58,13 +64,17 @@ public class AutocompleteServlet extends HttpServlet {
         sb.append("[");
         while ((line = br.readLine()) != null) {
 
-                // use comma as separator
-          //Add the code to only pull results based on search letters
-          users = line.split(cvsSplitBy);
-          sb.append("{\"label\":\n");
-          sb.append('"'+ users[0] +'"' + "\n" );
-          sb.append(",\"value\":\n");
-          sb.append('"'+ users[1] +'"' + "},");
+         users = line.split(cvsSplitBy);
+         String userFirstTwo = users[0].substring(0,2);
+
+         if(searchString.compareToIgnoreCase(userFirstTwo) == 0)
+         {
+             sb.append("{\"label\":\n");
+             sb.append('"' + users[0] + '"' + "\n");
+             sb.append(",\"value\":\n");
+             sb.append('"' + users[1] + '"' + "},");
+
+         }else{continue;}
         }
 
         results  = sb.toString().substring(0, sb.toString().length()-1) + "]";
@@ -86,6 +96,10 @@ public class AutocompleteServlet extends HttpServlet {
       return results;
     }
 
+    /**
+     * Returns a file object from the JIRA_HOME based on the file name. In this case a CSV file
+     * @return csvFile
+     */
     private File getFile(){
         File csvFile = null;
 

@@ -32,7 +32,7 @@
     <resource name="edit" type="velocity" location="/templates/customfields/data-user-custom-field/edit.vm"/>
   </customfield-type>
 
-  <servlet name='Data User Autocomplete Servlet' key='data-user-servlet' class='com.anthem.juju.AutocompleteServlet'>
+  <servlet name='Data User AutoComplete Servlet' key='data-user-servlet' class='com.anthem.juju.AutoCompleteServlet'>
     <description>This servlet responds to the autocomplete widget's AJAX search.</description>
     <url-pattern>/juju/user-search</url-pattern>
   </servlet>
