@@ -6,7 +6,7 @@ function juju_init(context) {
       {    	 
     	//source:data,  
     	source: AJS.params.baseURL + "/plugins/servlet/juju/user-search",
-        minLength: 2 
+        minLength: 2
         }
     );
 }

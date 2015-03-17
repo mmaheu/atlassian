@@ -51,9 +51,8 @@ public class AutoCompleteServlet extends HttpServlet {
      */
     public String searchUsers(String searchString){
 
-     // String csvFile = "/Users/mmaheu/Development/users.csv";  ** Show class that we can avoid hardcoding paths
       BufferedReader br = null;
-      String line = "";
+      String line;
       String results = "";
       String cvsSplitBy = ",";
       String[] users;
@@ -62,19 +61,21 @@ public class AutoCompleteServlet extends HttpServlet {
 
         br = new BufferedReader(new FileReader(getFile()));
         sb.append("[");
-        while ((line = br.readLine()) != null) {
 
+        while ((line = br.readLine()) != null && line.length() > 0)
+        {
          users = line.split(cvsSplitBy);
          String userFirstTwo = users[0].substring(0,2);
+         String tmpSearch = searchString.substring(0,2);
 
-         if(searchString.compareToIgnoreCase(userFirstTwo) == 0)
-         {
-             sb.append("{\"label\":\n");
-             sb.append('"' + users[0] + '"' + "\n");
-             sb.append(",\"value\":\n");
-             sb.append('"' + users[1] + '"' + "},");
+             if(tmpSearch.compareToIgnoreCase(userFirstTwo) == 0)
+             {
+                 sb.append("{\"label\":\n");
+                 sb.append('"' + users[0] + '"' + "\n");
+                 sb.append(",\"value\":\n");
+                 sb.append('"' + users[1] + '"' + "},");
 
-         }else{continue;}
+             }
         }
 
         results  = sb.toString().substring(0, sb.toString().length()-1) + "]";
